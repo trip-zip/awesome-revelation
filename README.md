@@ -1,13 +1,12 @@
 # revelation.lua
 
-Provides Mac OSX like 'Expose' view of all clients. 
+Provides Mac OSX like 'Expose' view of all clients.
 
-This is a fork from [revelation](https://github.com/bioe007/awesome-revelation)
-It is modified from the original revelation.lua for incorporating with awesome 3.5 or later. 
-It also have some features.  
+This is a fork from [guotsuan/awesome-revelation](https://github.com/guotsuan/awesome-revelation), focused on providing stable, well-maintained support for **AwesomeWM 4.x and later** (including the git development version), as well as **[somewm](https://github.com/trip-zip/somewm)** (a Wayland implementation of AwesomeWM).
 
+**This fork specifically targets AwesomeWM 4.x+ and somewm with stable LTS support**
 
-**Now master branch works for both master and stable awesome WM**
+While the upstream repository supports both 3.x and 4.x, this fork concentrates on maintaining compatibility and stability for modern AwesomeWM versions (4.x and git) and somewm, ensuring reliable performance for current and future releases on both X11 and Wayland.
 
 ## Changes since 2015-09-26
 When all clients are exposing, you can zoom (__Modkey + Shift + hintbox charater__ or __right button__ of the mouse)
@@ -62,7 +61,7 @@ is_excluded=true})`.
 
  1. Clone the repository:
 
-        git clone https://github.com/guotsuan/awesome-revelation revelation
+        git clone https://github.com/trip-zip/awesome-revelation revelation
 
  2. Include it at the top of your rc.lua file:
     `local revelation=require("revelation")`
@@ -151,7 +150,11 @@ to change the settings, use:
 
 ## Credits
 
-### Maintenance
+### This Fork
+    * Maintained by trip-zip
+    * Focus: AwesomeWM 4.x+ and somewm (Wayland) stable LTS support
+
+### Upstream Maintenance
     * Quan Guo <guotsuan@gmail.com>
     * Perry Hargrave <resixian@gmail.com>
 
