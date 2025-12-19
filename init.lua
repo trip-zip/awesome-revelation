@@ -178,15 +178,16 @@ function revelation.expose(args)
     clientData = {}
 
     for scr=1,capi.screen.count() do
+        local s = capi.screen[scr]
         t[scr] = awful.tag.new({revelation.tag_name},
-            scr, awful.layout.suit.fair)[1]
+            s, awful.layout.suit.fair)[1]
         zt[scr] = awful.tag.new({revelation.tag_name.."_zoom"},
-            scr, awful.layout.suit.fair)[1]
+            s, awful.layout.suit.fair)[1]
 
         if curr_tag_only then
-            match_clients(rule, awful.client.visible(scr), t[scr], is_excluded)
+            match_clients(rule, awful.client.visible(s), t[scr], is_excluded)
         else
-            match_clients(rule, capi.client.get(scr), t[scr], is_excluded)
+            match_clients(rule, capi.client.get(s), t[scr], is_excluded)
         end
 
         view_only_func(t[scr])
@@ -219,13 +220,14 @@ end
 
 function revelation.restore(t, zt)
     for scr=1, capi.screen.count() do
-        awful.tag.history.restore(scr)
+        local s = capi.screen[scr]
+        awful.tag.history.restore(s)
         t[scr].screen = nil
     end
 
     capi.keygrabber.stop()
     capi.mousegrabber.stop()
-    
+
      for _, c in pairs(clients) do
             if clientData[c] then
                 for k,v in pairs(clientData[c]) do
@@ -241,7 +243,7 @@ function revelation.restore(t, zt)
                 end
             end
       end
-    
+
     for scr=1, capi.screen.count() do
         t[scr].activated = false
         zt[scr].activated = false
@@ -315,7 +317,7 @@ function revelation.expose_callback(t, zt, clientlist)
 
 
             elseif zoomedClient ~= nil then
-                awful.tag.history.restore(zoomedClient.screen.index or zoomedClient.screen)
+                awful.tag.history.restore(zoomedClient.screen)
                 toggle_tag_func(zt[zoomedClient.screen.index or zoomedClient.screen], zoomedClient)
                 hintbox_display_toggle(key_char_zoomed,  true)
                 if type(delayed_call) == 'function' then 
@@ -448,7 +450,7 @@ function revelation.expose_callback(t, zt, clientlist)
                 zoomed = true
                 key_char_zoomed = key_char
             elseif zoomedClient ~= nil then
-                awful.tag.history.restore(zoomedClient.screen.index or zoomedClient.screen)
+                awful.tag.history.restore(zoomedClient.screen)
                 toggle_tag_func(zt[zoomedClient.screen.index or zoomedClient.screen], zoomedClient)
                 hintbox_display_toggle(key_char_zoomed, true)
                 if type(delayed_call) == 'function' then 
